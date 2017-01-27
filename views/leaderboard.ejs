@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'  type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <style media="screen">
+
+      .row1, .row2 {
+              font-family: 'Old Standard TT';
+              font-style: italic;
+              /*font-style: bold;*/
+              font-size: 200%;
+
+      }
+      .container {
+        /*background-color: rgb(0, 153, 51);*/
+        color:white;
+      }
+      .body {
+              background-image: url(https://www.neh.gov/files/news/press_releases/openbooks.jpg);
+              /*background-color: #004d00;*/
+              background-size: cover;
+              padding:0px 0px 0px 0px;
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+      }
+    </style>
+  </head>
+  <body class="body">
+    <div class="container">
+
+    <div class="row row1 col-lg-offset-4">
+    <h1><%= title %></h1>
+    </div>
+    <div class="row row2">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Sr No.</th>
+          <th>Candidate Name</th>
+          <th>Score</th>
+          <th>Date & Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <%= cid %> -->
+        <% result.forEach(function(s, idx) { %>
+          <!-- var id = req.params.id; -->
+      <!-- <h3><%= s.age %></h3><br> -->
+         <% if(cid == s._id) { %>
+        <tr style="background-color:black">
+            <td><%= idx+1 %></td>
+            <td><%= s.name %></td>
+            <td><%= s.number %></td>
+            <td><%= s.time %></td>
+
+        </tr>
+        <% }  else {%>
+          <tr>
+              <td><%= idx+1 %></td>
+              <td><%= s.name %></td>
+              <td><%= s.number %></td>
+              <td><%= s.time %></td>
+
+          </tr>
+        <% } %>
+
+      <% }) %>
+      </tbody>
+   </table>
+   </div>
+  </div>
+  </body>
+</html>

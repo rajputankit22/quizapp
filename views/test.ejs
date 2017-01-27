@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'  type='text/css'>
+
+    <title><%= title %></title>
+    <style media="screen">
+      .container1 {
+                 /*background-image: url(https://i.stack.imgur.com/s3BcM.png);*/
+                 background-color: rgb(0, 153, 51);
+                 opacity: 0.9;
+      }
+
+      .body {
+              background-image: url(https://www.neh.gov/files/news/press_releases/openbooks.jpg);
+              background-size: cover;
+              padding:0px 0px 0px 0px;
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+      }
+      .questions, .container1 {
+              font-family: 'Old Standard TT';
+              font-style: italic;
+              font-style: bold;
+      }
+
+
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+     <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <body class="body">
+    <div class="container ">
+
+
+    <div class="container1 col-lg-6 col-lg-offset-3">
+      <div class="col-lg-6 col-lg-offset-4">
+       <h1><%= title %></h1>
+      </div>
+
+
+    <div class="form-group has-success">
+    <label for="name"><h3>Name of student:</h3></label>
+    <input id="name" class="form-control" type="text" value="" placeholder="Name of student">
+    </div>
+    <hr>
+    <div class="questions">
+      <% questionbank.forEach(function(s, idx) { %>
+
+         <h4><strong><span><%= idx+1 %> .  </span><%= s.questions %></strong></h4>
+          <ul class="">
+             <form>
+             <div class="radio">
+             <li><span><input type="radio" name="optradio<%= idx %>" data-id="<%= s._id %>" value="<%= s.options[0] %>"></span><h5><strong><%= s.options[0] %></strong></h5></li>
+             </div>
+             <div class="radio">
+             <li><span><input type="radio" name="optradio<%= idx %>" data-id="<%= s._id %>" value="<%= s.options[1] %>"></span><h5><strong><%= s.options[1] %></strong></h5></li>
+             </div>
+             <div class="radio">
+             <li><span><input type="radio" name="optradio<%= idx %>" data-id="<%= s._id %>" value="<%= s.options[2] %>"></span><h5><strong><%= s.options[2] %></strong></h5></li>
+             </div>
+             <div class="radio">
+             <li><span><input type="radio" name="optradio<%= idx %>" data-id="<%= s._id %>" value="<%= s.options[3] %>"></span><h5><strong><%= s.options[3] %></strong></h5></li>
+             </div>
+             </form>
+          </ul>
+
+       <% }) %>
+    </div>
+    <hr>
+
+  <div class="col-lg-6 col-lg-offset-5">
+    <button type="button" id="cal" class="btn btn-primary" name="button">Submit</button>
+  </div>
+
+    </div>
+    </div>
+    <script>
+  $(document).ready(function() {
+
+    $("#cal").click(function(){
+      //  var time = $.now();
+      var dt = new Date();
+//var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+      //  var time = dt.toLocaleString('en-US')
+        var time = dt.toLocaleString('en-US', { hour: 'numeric', minute:'numeric',  hour12: true });
+         //console.log(date);
+        // var ansobj = [];
+        // var idobj = [];
+      //  var obj = { ansobj : [], idobj : [] };
+           var arrData = [];
+        <% for( itr = 0 ; itr < 5 ; itr++ ){ %>
+        var ansobj=( $("input[name='optradio<%= itr %>']:checked").val());
+        var idobj=( $("input[name='optradio<%= itr %>']:checked").data('id'));
+      //  console.log(idobj);
+      var obj = {
+             q :  ansobj,
+              i : idobj
+      }
+
+          arrData.push(obj);
+        // if(radioValue){
+        //     alert(radioValue + " " + "optradio<%= itr %>");
+        // }
+    <%}%>
+    console.log(arrData);
+    var result = {
+        name : $('#name').val(),
+        // studentans : ansobj,
+        // questionid : idobj,
+        res : arrData,
+        submittime : time
+    }
+    var id;
+    $.ajax({
+        async : false,
+        type:"POST",
+        //cache:false,
+        url:"/",
+        data:result,    // multiple data sent using ajax,send all form contant by a single object
+        success: function (result) {
+            // console.log(result);
+          alert(result.cid);
+          id = result.cid;
+        }
+      });
+      window.location.href="/leaderboard/" + id;
+    });
+  });
+</script>
+<!-- <script>
+script type="text/javascript">
+
+        $("#btn-sub").click(function(){
+            <% for( itr = 0 ; itr < 5 ; itr++ ){ %>
+            var radioValue = $("input[name='opt<%= itr %>']:checked").val();
+            console.log(radioValue);
+            if(radioValue){
+                alert(radioValue + " " + "opt<%= itr %>");
+            }
+        <%}%>
+        });
+
+
+    </script> -->
+
+  </body>
+</html>
