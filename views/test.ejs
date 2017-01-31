@@ -124,7 +124,7 @@
     }
     var id;
     $.ajax({
-        async : false,
+        
         type:"POST",
         //cache:false,
         url:"/",
@@ -133,9 +133,10 @@
             // console.log(result);
           alert(result.cid);
           id = result.cid;
+          window.location.href="/leaderboard/" + id;
         }
       });
-      window.location.href="/leaderboard/" + id;
+
     });
   });
 </script>

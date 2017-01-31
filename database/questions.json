@@ -1,0 +1,5 @@
+{"_id":{"$oid":"588780b82e5b51ec75e6efb1"},"questions":"In which header file is the NULL macro defined?","options":["stdio.h","stddef.h","stdio.h and stddef.h","math.h"],"correct":"stdio.h and stddef.h"}
+{"_id":{"$oid":"588783aaf02c8a8a2e6d4edd"},"questions":"The const feature can be applied to?","options":["An identifier","An array","An array argument","All of above"],"correct":"All of above"}
+{"_id":{"$oid":"588783b7f02c8a8a2e6d4ede"},"questions":"C language has been developed by ?","options":["Dennis Ritchie","Peter Norton","Ken Thompson","Martin Richards"],"correct":"Dennis Ritchie"}
+{"_id":{"$oid":"588783cef02c8a8a2e6d4edf"},"questions":"Smallest element of Array Index is called ?","options":["Lower Bond","Upper Bond","Extraction","Rang"],"correct":"Lower Bond"}
+{"_id":{"$oid":"588783dcf02c8a8a2e6d4ee0"},"questions":"The value of automatic variable that is declared but not initialized will be?","options":["0","1","Unpredictable","None of above"],"correct":"Unpredictable"}
