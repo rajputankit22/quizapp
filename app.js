@@ -8,7 +8,7 @@ var moment = require('moment');
 var mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/app');
 mongoose.connect('mongodb://questionbank:SumanPramod22mlab@ds143559.mlab.com:43559/app');
-var config = require('./config')[process.env.NODE_ENV || 'development'];
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
