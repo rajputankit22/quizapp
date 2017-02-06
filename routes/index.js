@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var moment = require('moment');
 
-var Questionbank = require('../models/questionbank');
-var Result = require('../models/result');
+var Questionbank = require('../models/questionbanks');
+var Result = require('../models/results');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
